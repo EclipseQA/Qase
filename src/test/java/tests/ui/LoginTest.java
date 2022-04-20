@@ -10,7 +10,7 @@ import testdata.GetLoginModel;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void loginWithValidData() {
+    public void loginWithValidDataTest() {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.openPage()
@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void loginWithInvalidData() {
+    public void loginWithInvalidDataTest() {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.openPage()
@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "missingFields", dataProviderClass = GetLoginModel.class)
-    public void loginWithMissingFields(String email, String password) {
+    public void loginWithMissingFieldsTest(String email, String password) {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.openPage()
