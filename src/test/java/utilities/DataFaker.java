@@ -13,4 +13,9 @@ public class DataFaker {
         Faker faker = new Faker();
         return faker.internet().password();
     }
+
+    public static String getProjectName() {
+        Faker faker = new Faker();
+        return faker.app().name();
+    }
 }
