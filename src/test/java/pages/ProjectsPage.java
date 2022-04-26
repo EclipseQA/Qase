@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import staticdata.WebUrl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +14,7 @@ public class ProjectsPage extends BasePage {
 
     private By CREATE_NEW_PROJECT_BUTTON = By.id("createButton");
     private By DELETE_PROJECT_BUTTON = By.xpath("//button[@type='submit']");
-    private String PROJECT_XPATH = "//tr[contains(.,'%s')]";
+    private String PROJECT_XPATH = "//tr[contains(.,'%s')]//a[@class='project-name']";
 
     public void clickCreateNewProjectButton() {
         driver.findElement(CREATE_NEW_PROJECT_BUTTON).click();
@@ -24,12 +25,23 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
+    public void navigateToProjectRepository(String projectName) {
+        String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
+        driver.findElement(By.xpath(formattedProjectXpath)).click();
+    }
+
+    public ProjectsPage openProjectsPage() {
+        driver.get(WebUrl.QASE_PROJECTS);
+        System.out.println("allo");
+        return this;
+    }
+
     public boolean isProjectDeleted(String projectName) {
-        PROJECT_XPATH = String.format(PROJECT_XPATH, projectName);
+        String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             return new WebDriverWait(driver, 5)
-                    .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(PROJECT_XPATH)));
+                    .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(formattedProjectXpath)));
         } catch (NoSuchElementException e) {
             return true;
         }

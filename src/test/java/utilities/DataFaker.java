@@ -18,4 +18,14 @@ public class DataFaker {
         Faker faker = new Faker();
         return faker.app().name();
     }
+
+    public static String getTitleName(){
+        Faker faker = new Faker();
+        return faker.harryPotter().spell();
+    }
+
+    public static String getDescription(){
+        Faker faker = new Faker();
+        return faker.harryPotter().quote();
+    }
 }

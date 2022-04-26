@@ -6,14 +6,13 @@ import pages.LoginPage;
 import pages.NewProjectPage;
 import pages.ProjectRepositoryPage;
 import pages.ProjectsPage;
+import staticdata.ProjectData;
 import testdata.GetLoginModel;
-import utilities.DataFaker;
+import utilities.Retry;
 
 public class CreateProjectTest extends BaseTest {
 
-    private String projectName;
-
-    @Test
+    @Test(groups = "project", retryAnalyzer = Retry.class)
     public void createNewProjectTest() {
         LoginPage loginPage = new LoginPage(driver);
         ProjectsPage projectsPage = new ProjectsPage(driver);
@@ -25,15 +24,14 @@ public class CreateProjectTest extends BaseTest {
 
         projectsPage.clickCreateNewProjectButton();
 
-        projectName = DataFaker.getProjectName();
-        newProjectPage.inputProjectFields(projectName)
+        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME)
                 .clickCreateProjectButton();
 
-        Assert.assertEquals(repositoryPage.isProjectCreated(projectName), true
+        Assert.assertEquals(repositoryPage.isProjectCreated(ProjectData.PROJECT_NAME), true
                 , "Project wasn't created");
     }
 
-    @Test(dependsOnMethods = "createNewProjectTest")
+    @Test(groups = "project", dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class)
     public void createProjectWithTheSameCodeTest() {
         ProjectsPage projectsPage = new ProjectsPage(driver);
         NewProjectPage newProjectPage = new NewProjectPage(driver);
@@ -42,22 +40,23 @@ public class CreateProjectTest extends BaseTest {
         repositoryPage.clickTabElement("Projects");
         projectsPage.clickCreateNewProjectButton();
 
-        newProjectPage.inputProjectFields(projectName)
+        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME)
                 .clickCreateProjectButton();
 
         Assert.assertEquals(newProjectPage.isProjectExistsMessageShown(), true
                 , "Projected is created");
     }
 
-    @Test(dependsOnMethods = {"createProjectWithTheSameCodeTest", "createNewProjectTest"})
-    public void deleteCreatedProjectTest() {
-        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
-        ProjectsPage projectsPage = new ProjectsPage(driver);
-
-        repositoryPage.clickTabElement("Projects");
-        projectsPage.clickProjectDropDown(projectName, "Delete")
-                .confirmDeleteProjectButton();
-        Assert.assertEquals(projectsPage.isProjectDeleted(projectName), true
-                , "Project wasn't deleted");
-    }
+//    @Test(dependsOnMethods = {"createProjectWithTheSameCodeTest", "createNewProjectTest"},
+//    retryAnalyzer = Retry.class)
+//    public void deleteCreatedProjectTest() {
+//        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
+//        ProjectsPage projectsPage = new ProjectsPage(driver);
+//
+//        repositoryPage.clickTabElement("Projects");
+//        projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")
+//                .confirmDeleteProjectButton();
+//        Assert.assertEquals(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME), true
+//                , "Project wasn't deleted");
+//    }
 }

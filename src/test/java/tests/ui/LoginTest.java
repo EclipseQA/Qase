@@ -5,11 +5,12 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import staticdata.WebUrl;
 import testdata.GetLoginModel;
+import utilities.Retry;
 
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void loginWithValidDataTest() {
         LoginPage loginPage = new LoginPage(driver);
 
@@ -19,7 +20,7 @@ public class LoginTest extends BaseTest {
                 , "Invalid data");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void loginWithInvalidDataTest() {
         LoginPage loginPage = new LoginPage(driver);
 
@@ -29,7 +30,9 @@ public class LoginTest extends BaseTest {
                 , "You managed to log in");
     }
 
-    @Test(dataProvider = "missingFields", dataProviderClass = GetLoginModel.class)
+    @Test(dataProvider = "missingFields",
+            dataProviderClass = GetLoginModel.class,
+            retryAnalyzer = Retry.class)
     public void loginWithMissingFieldsTest(String email, String password) {
         LoginPage loginPage = new LoginPage(driver);
 
