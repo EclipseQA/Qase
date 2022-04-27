@@ -1,32 +1,27 @@
 package tests.ui;
 
+import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.CreateTestCasePage;
-import pages.LoginPage;
-import pages.ProjectRepositoryPage;
-import pages.ProjectsPage;
 import staticdata.ProjectData;
 import testdata.GetCreateCaseModel;
 import testdata.GetLoginModel;
 import utilities.Retry;
 
+@Epic("Creation of Test Case")
 public class CreateTestCaseTest extends BaseTest {
 
-    @Test(groups = "case", dependsOnGroups = {"project"}, retryAnalyzer = Retry.class)
-    public void createTestCaseTest() {
-//        LoginPage loginPage = new LoginPage(driver);
-//        loginPage.openPage()
-//                .login(GetLoginModel.getLoginModelWithValidData());
+    @Test(retryAnalyzer = Retry.class, groups = "case")
+    public void createTestCaseTest() throws InterruptedException {
 
-        ProjectsPage projectsPage = new ProjectsPage(driver);
+        loginPage.openPage()
+                .login(GetLoginModel.getLoginModelWithValidData());
+
         projectsPage.openProjectsPage()
                 .navigateToProjectRepository(ProjectData.PROJECT_NAME);
 
-        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
         repositoryPage.clickCreateCaseButton();
 
-        CreateTestCasePage testCasePage = new CreateTestCasePage(driver);
         testCasePage.inputAllFields(GetCreateCaseModel.getCreateCaseModel())
                 .clickSaveButton();
 

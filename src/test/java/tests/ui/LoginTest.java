@@ -1,5 +1,6 @@
 package tests.ui;
 
+import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -7,7 +8,7 @@ import staticdata.WebUrl;
 import testdata.GetLoginModel;
 import utilities.Retry;
 
-
+@Epic("Login Test")
 public class LoginTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)

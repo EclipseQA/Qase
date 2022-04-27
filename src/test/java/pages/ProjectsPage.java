@@ -32,7 +32,6 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage openProjectsPage() {
         driver.get(WebUrl.QASE_PROJECTS);
-        System.out.println("allo");
         return this;
     }
 

@@ -1,23 +1,17 @@
 package tests.ui;
 
+import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.NewProjectPage;
-import pages.ProjectRepositoryPage;
-import pages.ProjectsPage;
 import staticdata.ProjectData;
 import testdata.GetLoginModel;
 import utilities.Retry;
 
+@Epic("Creation of Project Test")
 public class CreateProjectTest extends BaseTest {
 
-    @Test(groups = "project", retryAnalyzer = Retry.class)
-    public void createNewProjectTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        ProjectsPage projectsPage = new ProjectsPage(driver);
-        NewProjectPage newProjectPage = new NewProjectPage(driver);
-        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
+    @Test(retryAnalyzer = Retry.class, groups = "project")
+    public void createNewProjectTest() throws InterruptedException {
 
         loginPage.openPage()
                 .login(GetLoginModel.getLoginModelWithValidData());
@@ -31,11 +25,8 @@ public class CreateProjectTest extends BaseTest {
                 , "Project wasn't created");
     }
 
-    @Test(groups = "project", dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class)
+    @Test(dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class, groups = "project")
     public void createProjectWithTheSameCodeTest() {
-        ProjectsPage projectsPage = new ProjectsPage(driver);
-        NewProjectPage newProjectPage = new NewProjectPage(driver);
-        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
 
         repositoryPage.clickTabElement("Projects");
         projectsPage.clickCreateNewProjectButton();
@@ -50,8 +41,6 @@ public class CreateProjectTest extends BaseTest {
 //    @Test(dependsOnMethods = {"createProjectWithTheSameCodeTest", "createNewProjectTest"},
 //    retryAnalyzer = Retry.class)
 //    public void deleteCreatedProjectTest() {
-//        ProjectRepositoryPage repositoryPage = new ProjectRepositoryPage(driver);
-//        ProjectsPage projectsPage = new ProjectsPage(driver);
 //
 //        repositoryPage.clickTabElement("Projects");
 //        projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")
