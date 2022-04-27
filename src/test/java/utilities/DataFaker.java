@@ -28,4 +28,9 @@ public class DataFaker {
         Faker faker = new Faker();
         return faker.harryPotter().quote();
     }
+
+    public static String getPostConditionals(){
+        Faker faker = new Faker();
+        return faker.internet().slug();
+    }
 }

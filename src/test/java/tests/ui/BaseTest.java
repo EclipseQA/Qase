@@ -4,8 +4,8 @@ import driver.DriverFactory;
 import driver.DriverManager;
 import driver.DriverType;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import pages.*;
 
 public class BaseTest {
@@ -18,7 +18,7 @@ public class BaseTest {
     protected ProjectRepositoryPage repositoryPage;
     protected CreateTestCasePage testCasePage;
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp() {
         DriverFactory factory = new DriverFactory();
         driverManager = factory.getDriverManager(DriverType.CHROME);
@@ -33,8 +33,12 @@ public class BaseTest {
         testCasePage = new CreateTestCasePage(driver);
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression Test">
-    <test name="test 1">
+    <test name="Login Test">
+
+        <classes>
+            <class name="tests.ui.LoginTest"></class>
+        </classes>
+
+    </test>
+
+    <test name="Create Project Test">
 
         <groups>
             <dependencies>
@@ -15,7 +23,7 @@
 
     </test>
 
-    <test name="test 2">
+    <test name="Create Test Case">
 
         <classes>
             <class name="tests.ui.CreateTestCaseTest"></class>

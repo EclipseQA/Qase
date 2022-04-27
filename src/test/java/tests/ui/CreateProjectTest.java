@@ -1,6 +1,6 @@
 package tests.ui;
 
-import io.qameta.allure.Epic;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import staticdata.ProjectData;
@@ -11,14 +11,18 @@ import utilities.Retry;
 public class CreateProjectTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, groups = "project")
-    public void createNewProjectTest() throws InterruptedException {
+    @Description("User attempts to create new project")
+    @Story("Test for creating new project")
+    @Severity(SeverityLevel.CRITICAL)
+    public void createNewProjectTest() {
 
         loginPage.openPage()
                 .login(GetLoginModel.getLoginModelWithValidData());
 
         projectsPage.clickCreateNewProjectButton();
 
-        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME)
+        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME
+                        , "Private", "Add all")
                 .clickCreateProjectButton();
 
         Assert.assertEquals(repositoryPage.isProjectCreated(ProjectData.PROJECT_NAME), true
@@ -26,26 +30,19 @@ public class CreateProjectTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class, groups = "project")
+    @Description("User attempts to create project with an existing name(depends on 'createNewProjectTest')")
+    @Story("Test for creating project with an existing name")
+    @Severity(SeverityLevel.NORMAL)
     public void createProjectWithTheSameCodeTest() {
 
         repositoryPage.clickTabElement("Projects");
         projectsPage.clickCreateNewProjectButton();
 
-        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME)
+        newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME
+                        , "Private", "Add all")
                 .clickCreateProjectButton();
 
         Assert.assertEquals(newProjectPage.isProjectExistsMessageShown(), true
                 , "Projected is created");
     }
-
-//    @Test(dependsOnMethods = {"createProjectWithTheSameCodeTest", "createNewProjectTest"},
-//    retryAnalyzer = Retry.class)
-//    public void deleteCreatedProjectTest() {
-//
-//        repositoryPage.clickTabElement("Projects");
-//        projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")
-//                .confirmDeleteProjectButton();
-//        Assert.assertEquals(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME), true
-//                , "Project wasn't deleted");
-//    }
 }

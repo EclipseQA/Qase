@@ -15,6 +15,8 @@ public class GetCreateCaseModel {
                 .type(Type.SMOKE.getType())
                 .behavior(Behavior.POSITIVE.getBehavior())
                 .automationStatus(AutomationStatus.AUTOMATED.getAutomationStatus())
+                .preConditions("Windows 10, Chrome Version 100.0.4896.127")
+                .postConditionals(DataFaker.getPostConditionals())
                 .build();
     }
 }

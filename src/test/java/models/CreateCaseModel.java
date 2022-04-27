@@ -14,6 +14,7 @@ public class CreateCaseModel {
     private String type;
     private String behavior;
     private String automationStatus;
-
+    private String preConditions;
+    private String postConditionals;
 }
 
