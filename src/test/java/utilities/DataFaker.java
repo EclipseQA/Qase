@@ -4,33 +4,29 @@ import com.github.javafaker.Faker;
 
 public class DataFaker {
 
+    private static Faker faker = new Faker();
+
     public static String getEmail() {
-        Faker faker = new Faker();
         return faker.internet().emailAddress();
     }
 
     public static String getPassword() {
-        Faker faker = new Faker();
         return faker.internet().password();
     }
 
     public static String getProjectName() {
-        Faker faker = new Faker();
-        return faker.app().name();
+        return faker.letterify("?????????");
     }
 
-    public static String getTitleName(){
-        Faker faker = new Faker();
-        return faker.harryPotter().spell();
-    }
-
-    public static String getDescription(){
-        Faker faker = new Faker();
+    public static String getDescription() {
         return faker.harryPotter().quote();
     }
 
-    public static String getPostConditionals(){
-        Faker faker = new Faker();
+    public static String getPostConditionals() {
         return faker.internet().slug();
+    }
+
+    public static String getTestCaseName() {
+        return faker.leagueOfLegends().champion();
     }
 }

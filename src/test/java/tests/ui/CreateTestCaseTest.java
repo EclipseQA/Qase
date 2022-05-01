@@ -1,11 +1,11 @@
 package tests.ui;
 
 import io.qameta.allure.*;
+import models.CreateCaseModel;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import staticdata.ProjectData;
-import testdata.GetCreateCaseModel;
 import testdata.GetLoginModel;
 import utilities.Retry;
 import utilities.TestListeners;
@@ -18,17 +18,17 @@ public class CreateTestCaseTest extends BaseTest {
     @Description("Test asserts that user is able to create 'test case'")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Test for creating Test case")
-    public void createTestCaseTest() {
+    public void createTestCaseTest() throws Exception {
 
         loginPage.openPage()
                 .login(GetLoginModel.getLoginModelWithValidData());
 
         projectsPage.openProjectsPage()
-                .navigateToProjectRepository("Greenlam");
+                .navigateToProjectRepository(ProjectData.PROJECT_NAME);
 
         repositoryPage.clickCreateCaseButton();
 
-        testCasePage.inputAllFields(GetCreateCaseModel.getCreateCaseModel())
+        testCasePage.inputAllFields(ProjectData.EXPECTED_CASE_MODEL)
                 .clickAddAttachmentButton()
                 .sendAttachment("D:\\Qase\\src\\test\\resources\\fileToAttach.jpg")
                 .clickSaveButton();
@@ -37,14 +37,28 @@ public class CreateTestCaseTest extends BaseTest {
                 , "Test case wasn't created");
     }
 
+    @Test(dependsOnMethods = "createTestCaseTest")
+    @Description("Test asserts that created Test case corresponds to actual result")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Test for comparing actual and expected Test case model")
+    public void compareElementsOfCreatedTestCaseAndActualResultTest() {
+
+        repositoryPage.clickOnTestCase(ProjectData.PROJECT_NAME.toUpperCase());
+        CreateCaseModel expectedModel =
+                repositoryPage.getActualModelOfTestCase(ProjectData.TEST_CASE_NAME);
+
+        Assert.assertEquals(expectedModel, ProjectData.EXPECTED_CASE_MODEL);
+    }
+
     @Test(dependsOnMethods = "createTestCaseTest",
-            retryAnalyzer = Retry.class, enabled = false)
+            retryAnalyzer = Retry.class)
     @Description("Test asserts that project is deleted after previous tests")
     @Severity(SeverityLevel.NORMAL)
     @Story("Test for the removal of project")
     public void deleteCreatedProjectTest() {
 
-        repositoryPage.clickTabElement("Projects");
+        repositoryPage.closeTestCaseForm()
+                .clickTabElement("Projects");
         projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")
                 .confirmDeleteProjectButton();
         Assert.assertEquals(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME), true

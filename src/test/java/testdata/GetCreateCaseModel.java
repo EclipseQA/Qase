@@ -8,7 +8,7 @@ public class GetCreateCaseModel {
 
     public static CreateCaseModel getCreateCaseModel() {
         return CreateCaseModel.builder()
-                .title(DataFaker.getTitleName())
+                .title(ProjectData.TEST_CASE_NAME)
                 .description(DataFaker.getDescription())
                 .severity(Severity.MINOR.getSeverity())
                 .priority(Priority.MEDIUM.getPriority())

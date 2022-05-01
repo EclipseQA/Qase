@@ -5,21 +5,22 @@ import elements.TestCaseConditionalsElements;
 import io.qameta.allure.Step;
 import models.CreateCaseModel;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 
 public class CreateTestCasePage extends BasePage {
 
     private By TITLE_INPUT = By.id("title");
+    private By DESCRIPTION_INPUT = By.xpath("//label[contains(text(), 'Description')]/parent::div//p");
     private By SAVE_BUTTON = By.id("save-case");
     private By ADD_ATTACHMENT_BUTTON = By.xpath("//button[contains(@class, 'add-attachment')]");
     private By DROP_FILE_FORM = By.className("attach-new-form");
-    private By UPLOADED_FILES_XPATH = By.xpath("//p[contains(text(), '.png') or contains(text(), '.jpg')]");
 
     public CreateTestCasePage inputBasicFields(CreateCaseModel model) {
         inputTitleName(model.getTitle());
+        inputDescription(model.getDescription());
         selectSeverityOption(model.getSeverity());
         selectPriorityOption(model.getPriority());
         selectTypeOption(model.getType());
@@ -50,6 +51,12 @@ public class CreateTestCasePage extends BasePage {
     @Step("Input {0} in Title field")
     public CreateTestCasePage inputTitleName(String title) {
         driver.findElement(TITLE_INPUT).sendKeys(title);
+        return this;
+    }
+
+    @Step("Input {0} in Description field")
+    public CreateTestCasePage inputDescription(String title) {
+        driver.findElement(DESCRIPTION_INPUT).sendKeys(title);
         return this;
     }
 
@@ -90,24 +97,25 @@ public class CreateTestCasePage extends BasePage {
 
     @Step("Click 'Add attachment'")
     public CreateTestCasePage clickAddAttachmentButton() {
-        try {
-            driver.findElement(ADD_ATTACHMENT_BUTTON).click();
-        } catch (UnhandledAlertException e) {
-            try {
-                Alert alert = driver.switchTo().alert();
-                String alertText = alert.getText();
-                System.out.println("Alert data: " + alertText);
-                alert.dismiss();
-            } catch (NoAlertPresentException f) {
-                System.out.println("Получается нет алерта");
-            }
-        }
+        WebElement addAttachElement = driver.findElement((ADD_ATTACHMENT_BUTTON));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addAttachElement);
         return this;
     }
 
     @Step("Send attachment")
-    public CreateTestCasePage sendAttachment(String pathToAttachment) {
-        driver.findElement(DROP_FILE_FORM).sendKeys(pathToAttachment);
+    public CreateTestCasePage sendAttachment(String pathToAttachment) throws Exception {
+        driver.findElement(DROP_FILE_FORM).click();
+        Thread.sleep(2000);
+        Robot robot = new Robot();
+        Toolkit.getDefaultToolkit()
+                .getSystemClipboard()
+                .setContents(new StringSelection(pathToAttachment), null);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
         return this;
     }
 
