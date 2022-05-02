@@ -2,9 +2,11 @@ package pages;
 
 import elements.NewProjectElements;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+@Log4j
 public class NewProjectPage extends BasePage {
 
     private By PROJECT_NAME_INPUT = By.id("inputTitle");
@@ -13,6 +15,7 @@ public class NewProjectPage extends BasePage {
 
     @Step("Input {0} in Project name field")
     public NewProjectPage inputProjectName(String projectName) {
+        log.info("Send " + projectName + " to 'Project name'");
         driver.findElement(PROJECT_NAME_INPUT).sendKeys(projectName);
         return this;
     }
@@ -40,11 +43,13 @@ public class NewProjectPage extends BasePage {
 
     @Step("Click 'Create project' button")
     public void clickCreateProjectButton() {
+        log.info("Click on 'Create project' button");
         driver.findElement(CREATE_PROJECT_BUTTON).click();
     }
 
     @Step("Verify that 'Project with the same code already exists.' message is shown")
     public boolean isProjectExistsMessageShown() {
+        log.info("Check if the message 'Project with the same code exists' is displayed");
         return driver.findElement(PROJECT_EXISTS_MESSAGE).isDisplayed();
     }
 

@@ -1,12 +1,14 @@
 package tests.ui;
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import staticdata.ProjectData;
 import testdata.GetLoginModel;
 import utilities.Retry;
 
+@Log4j
 @Epic("Creation of Project Test")
 public class CreateProjectTest extends BaseTest {
 
@@ -15,7 +17,7 @@ public class CreateProjectTest extends BaseTest {
     @Story("Test for creating new project")
     @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectTest() {
-
+        log.info("createNewProjectTest is started");
         loginPage.openPage()
                 .login(GetLoginModel.getLoginModelWithValidData());
 
@@ -34,7 +36,7 @@ public class CreateProjectTest extends BaseTest {
     @Story("Test for creating project with an existing name")
     @Severity(SeverityLevel.NORMAL)
     public void createProjectWithTheSameCodeTest() {
-
+        log.info("createProjectWithTheSameCodeTest is started");
         repositoryPage.clickTabElement("Projects");
         projectsPage.clickCreateNewProjectButton();
 

@@ -1,6 +1,7 @@
 package tests.ui;
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j;
 import models.CreateCaseModel;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -10,6 +11,7 @@ import testdata.GetLoginModel;
 import utilities.Retry;
 import utilities.TestListeners;
 
+@Log4j
 @Epic("Creation of Test Case")
 @Listeners(TestListeners.class)
 public class CreateTestCaseTest extends BaseTest {
@@ -19,7 +21,7 @@ public class CreateTestCaseTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Test for creating Test case")
     public void createTestCaseTest() throws Exception {
-
+        log.info("createTestCaseTest is started");
         loginPage.openPage()
                 .login(GetLoginModel.getLoginModelWithValidData());
 
@@ -42,7 +44,7 @@ public class CreateTestCaseTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Test for comparing actual and expected Test case model")
     public void compareElementsOfCreatedTestCaseAndActualResultTest() {
-
+        log.info("compareElementsOfCreatedTestCaseAndActualResultTest is started");
         repositoryPage.clickOnTestCase(ProjectData.PROJECT_NAME.toUpperCase());
         CreateCaseModel expectedModel =
                 repositoryPage.getActualModelOfTestCase(ProjectData.TEST_CASE_NAME);
@@ -56,7 +58,7 @@ public class CreateTestCaseTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Test for the removal of project")
     public void deleteCreatedProjectTest() {
-
+        log.info("deleteCreatedProjectTest is started");
         repositoryPage.closeTestCaseForm()
                 .clickTabElement("Projects");
         projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")

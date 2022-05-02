@@ -2,6 +2,7 @@ package pages;
 
 import elements.ListOfProjects;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -11,14 +12,16 @@ import staticdata.WebUrl;
 
 import java.util.concurrent.TimeUnit;
 
+@Log4j
 public class ProjectsPage extends BasePage {
 
     private By CREATE_NEW_PROJECT_BUTTON = By.id("createButton");
     private By DELETE_PROJECT_BUTTON = By.xpath("//button[@type='submit']");
     private String PROJECT_XPATH = "//tr[contains(.,'%s')]//a[@class='project-name']";
 
-    @Step("Click on 'Create new project button'")
+    @Step("Click on 'Create new project' button")
     public void clickCreateNewProjectButton() {
+        log.info("Click on 'Create new project' button");
         driver.findElement(CREATE_NEW_PROJECT_BUTTON).click();
     }
 
@@ -30,18 +33,21 @@ public class ProjectsPage extends BasePage {
 
     @Step("Open {0} project repository")
     public void navigateToProjectRepository(String projectName) {
+        log.info("Open " + projectName + " repository");
         String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         driver.findElement(By.xpath(formattedProjectXpath)).click();
     }
 
     @Step("User is on Projects Page")
     public ProjectsPage openProjectsPage() {
+        log.info("Open Projects page");
         driver.get(WebUrl.QASE_PROJECTS);
         return this;
     }
 
     @Step("Verify that projected is deleted")
     public boolean isProjectDeleted(String projectName) {
+        log.info("Check if project " + projectName + " is deleted");
         String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -56,6 +62,7 @@ public class ProjectsPage extends BasePage {
 
     @Step("Confirm the removal of project")
     public void confirmDeleteProjectButton() {
+        log.info("Click on 'Delete project' button");
         driver.findElement(DELETE_PROJECT_BUTTON).click();
     }
 

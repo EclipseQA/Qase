@@ -3,11 +3,13 @@ package pages;
 import elements.RepositoryTestCaseElements;
 import elements.TabElements;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j;
 import models.CreateCaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+@Log4j
 public class ProjectRepositoryPage extends BasePage {
 
     private String ALERT_PROJECT_CREATED = "//span[contains(.,'Project \"%s\" was created successfully!')]";
@@ -19,17 +21,20 @@ public class ProjectRepositoryPage extends BasePage {
 
     @Step("Verify that '{0}' project is created")
     public boolean isProjectCreated(String projectName) {
+        log.info("Check if the message 'Project " + projectName + " was created' is displayed");
         String xpathAlertMessage = String.format(ALERT_PROJECT_CREATED, projectName);
         return driver.findElement(By.xpath(xpathAlertMessage)).isDisplayed();
     }
 
     @Step("Verify that Test Case is created")
     public boolean isTestCaseCreated() {
+        log.info("Check if the message 'Test case was created' is displayed");
         return driver.findElement(ALERT_TEST_CASE_CREATED).isDisplayed();
     }
 
     @Step("Click '+Case' button")
     public void clickCreateCaseButton() {
+        log.info("Click on '+Case' button");
         driver.findElement(CREATE_CASE_BUTTON).click();
     }
 
@@ -40,12 +45,14 @@ public class ProjectRepositoryPage extends BasePage {
 
     @Step("Select '{0}' Test case")
     public void clickOnTestCase(String nameOfTestCase) {
+        log.info("Open '" + nameOfTestCase + "' test case form");
         String formattedXpath = String.format(TEST_CASE_XPATH, nameOfTestCase);
         driver.findElement(By.xpath(formattedXpath)).click();
     }
 
     @Step("Getting actual result elements of Test Case {0}")
     public CreateCaseModel getActualModelOfTestCase(String nameOfTestCase) {
+        log.info("Collect actual information about " + nameOfTestCase + " test case");
         String formattedXpath = String.format(ACTUAL_TEST_TITLE, nameOfTestCase);
         return CreateCaseModel.builder()
                 .title(driver.findElement(By.xpath(formattedXpath)).getText())
@@ -61,7 +68,8 @@ public class ProjectRepositoryPage extends BasePage {
     }
 
     @Step("Close Test Case form")
-    public ProjectRepositoryPage closeTestCaseForm(){
+    public ProjectRepositoryPage closeTestCaseForm() {
+        log.info("Close test case form");
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(CLOSE_BUTTON));
         return this;
     }
