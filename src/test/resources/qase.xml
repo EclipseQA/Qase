@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression Test">
-    <test name="Login Test">
+<suite name="Regression Test" thread-count="2" parallel="tests">
+
+    <test name="Login Test">                               <!-- Test -->
 
         <classes>
             <class name="tests.ui.LoginTest"></class>
@@ -9,7 +10,7 @@
 
     </test>
 
-    <test name="Create Project Test">
+    <test name="Create Project Test">                      <!-- Test -->
 
         <groups>
             <dependencies>
@@ -23,11 +24,33 @@
 
     </test>
 
-    <test name="Create Test Case">
-
+    <test name="Create Test Case">                         <!-- Test -->
         <classes>
             <class name="tests.ui.CreateTestCaseTest"></class>
         </classes>
+    </test>
 
+    <test name="Assertion test case created">              <!-- Test -->
+        <groups>
+            <dependencies>
+                <group name="assertion" depends-on="case"></group>
+            </dependencies>
+        </groups>
+        <classes>
+            <class name="tests.ui.ComparisonOfCreatedAndActualResultTest"></class>
+        </classes>
+    </test>
+
+    <test name="Removal Test Case">                        <!-- Test -->
+
+        <groups>
+            <dependencies>
+                <group name="removal" depends-on="case"></group>
+            </dependencies>
+        </groups>
+
+        <classes>
+            <class name="tests.ui.DeleteCreatedProjectTest"></class>
+        </classes>
     </test>
 </suite>

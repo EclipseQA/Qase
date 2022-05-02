@@ -33,7 +33,7 @@ public class ProjectsPage extends BasePage {
 
     @Step("Open {0} project repository")
     public void navigateToProjectRepository(String projectName) {
-        log.info("Open " + projectName + " repository");
+        log.info("Open '" + projectName + "' repository");
         String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         driver.findElement(By.xpath(formattedProjectXpath)).click();
     }
@@ -47,7 +47,7 @@ public class ProjectsPage extends BasePage {
 
     @Step("Verify that projected is deleted")
     public boolean isProjectDeleted(String projectName) {
-        log.info("Check if project " + projectName + " is deleted");
+        log.info("Check if project '" + projectName + "' is deleted");
         String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

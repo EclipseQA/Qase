@@ -17,6 +17,7 @@ public class BaseTest {
     protected NewProjectPage newProjectPage;
     protected ProjectRepositoryPage repositoryPage;
     protected CreateTestCasePage testCasePage;
+    protected TestCaseRepositoryFormPage repositoryFormPage;
 
     @BeforeClass
     public void setUp() {
@@ -31,6 +32,7 @@ public class BaseTest {
         newProjectPage = new NewProjectPage(driver);
         repositoryPage = new ProjectRepositoryPage(driver);
         testCasePage = new CreateTestCasePage(driver);
+        repositoryFormPage = new TestCaseRepositoryFormPage(driver);
     }
 
     @AfterClass(alwaysRun = true)
