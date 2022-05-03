@@ -8,7 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import staticdata.uidata.WebUrl;
+import staticdata.WebUrl;
 
 import java.util.concurrent.TimeUnit;
 

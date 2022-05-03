@@ -1,4 +1,4 @@
-package staticdata.uidata.testcaseform;
+package staticdata;
 
 public enum Type {
 

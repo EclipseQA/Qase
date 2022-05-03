@@ -4,12 +4,12 @@ import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import staticdata.uidata.WebUrl;
-import testdata.uitestdata.GetLoginModel;
+import staticdata.WebUrl;
+import testdata.GetLoginModel;
 import utilities.Retry;
 
 @Log4j
-@Epic("Web test")
+@Epic("Login Test")
 public class LoginTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)

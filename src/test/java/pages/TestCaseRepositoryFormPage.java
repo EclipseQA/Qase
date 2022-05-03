@@ -3,7 +3,7 @@ package pages;
 import elements.RepositoryTestCaseElements;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j;
-import models.ui.CreateCaseModel;
+import models.CreateCaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

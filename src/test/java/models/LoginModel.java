@@ -1,4 +1,4 @@
-package models.ui;
+package models;
 
 import lombok.Builder;
 import lombok.Data;

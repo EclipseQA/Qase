@@ -4,13 +4,13 @@ import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import staticdata.commondata.ProjectData;
-import testdata.uitestdata.GetLoginModel;
+import staticdata.ProjectData;
+import testdata.GetLoginModel;
 import utilities.Retry;
 
 @Log4j
-@Epic("Web test")
-public class NewProjectTest extends BaseTest {
+@Epic("Creation of Project Test")
+public class CreateProjectTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, groups = "project")
     @Description("User attempts to create new project")
@@ -31,7 +31,7 @@ public class NewProjectTest extends BaseTest {
                 , "Project wasn't created");
     }
 
-    @Test(dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class)
+    @Test(dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class, groups = "project")
     @Description("User attempts to create project with an existing name(depends on 'createNewProjectTest')")
     @Story("Test for creating project with an existing name")
     @Severity(SeverityLevel.NORMAL)

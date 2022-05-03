@@ -1,8 +1,7 @@
-package testdata.uitestdata;
+package testdata;
 
-import models.ui.CreateCaseModel;
-import staticdata.commondata.ProjectData;
-import staticdata.uidata.testcaseform.*;
+import models.CreateCaseModel;
+import staticdata.*;
 import utilities.DataFaker;
 
 public class GetCreateCaseModel {

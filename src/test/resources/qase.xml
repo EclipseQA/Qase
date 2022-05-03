@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" thread-count="2" parallel="tests">
+
+    <test name="Login Test">                               <!-- Test -->
+
+        <classes>
+            <class name="tests.ui.LoginTest"></class>
+        </classes>
+
+    </test>
+
+    <test name="Create Project Test">                      <!-- Test -->
+
+        <groups>
+            <dependencies>
+                <group name="case" depends-on="project"></group>
+            </dependencies>
+        </groups>
+
+        <classes>
+            <class name="tests.ui.CreateProjectTest"></class>
+        </classes>
+
+    </test>
+
+    <test name="Create Test Case">                         <!-- Test -->
+        <classes>
+            <class name="tests.ui.CreateTestCaseTest"></class>
+        </classes>
+    </test>
+
+    <test name="Assertion test case created">              <!-- Test -->
+        <groups>
+            <dependencies>
+                <group name="assertion" depends-on="case"></group>
+            </dependencies>
+        </groups>
+        <classes>
+            <class name="tests.ui.ComparisonOfCreatedAndActualResultTest"></class>
+        </classes>
+    </test>
+
+    <test name="Removal Test Case">                        <!-- Test -->
+
+        <groups>
+            <dependencies>
+                <group name="removal" depends-on="case"></group>
+            </dependencies>
+        </groups>
+
+        <classes>
+            <class name="tests.ui.DeleteCreatedProjectTest"></class>
+        </classes>
+    </test>
+</suite>

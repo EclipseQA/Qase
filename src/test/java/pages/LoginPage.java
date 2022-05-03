@@ -2,10 +2,10 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j;
-import models.ui.LoginModel;
+import models.LoginModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import staticdata.uidata.WebUrl;
+import staticdata.WebUrl;
 
 @Log4j
 public class LoginPage extends BasePage {

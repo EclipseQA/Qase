@@ -1,4 +1,4 @@
-package staticdata.uidata.testcaseform;
+package staticdata;
 
 public enum Severity {
 
@@ -20,3 +20,4 @@ public enum Severity {
         return severity;
     }
 }
+
