@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" thread-count="1" parallel="tests" data-provider-thread-count="2">
+    
+    <listeners>
+        <listener class-name="utilities.TestListeners"></listener>
+    </listeners>
+
+    <test name="Login Test">                               <!-- Test -->
+        <classes>
+            <class name="tests.ui.LoginTest"></class>
+        </classes>
+    </test>
+
+    <test name="Create Project Test">                      <!-- Test -->
+        <classes>
+            <class name="tests.ui.NewProjectTest"></class>
+        </classes>
+    </test>
+
+    <test name="Create Test Case">                         <!-- Test -->
+        <classes>
+            <class name="tests.ui.NewTestCaseTest"></class>
+            <class name="tests.ui.ComparisonOfCreatedAndActualResultTest"></class>
+        </classes>
+    </test>
+
+    <test name="Removal Test Case">                        <!-- Test -->
+        <classes>
+            <class name="tests.ui.RemovalProjectTest"></class>
+        </classes>
+    </test>
+</suite>

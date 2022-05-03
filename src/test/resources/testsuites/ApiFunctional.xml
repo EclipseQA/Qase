@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Functional Test" thread-count="1" parallel="tests" data-provider-thread-count="2">
+
+    <listeners>
+        <listener class-name="utilities.TestListeners"></listener>
+    </listeners>
+
+    <test name="Creation of new Project">
+        <classes>
+            <class name="tests.api.NewProjectTest"></class>
+            <class name="tests.api.QuantityProjectTest"></class>
+        </classes>
+    </test>
+
+    <test name="Creation of new Test Case">
+        <classes>
+            <class name="tests.api.NewTestCaseTest"></class>
+            <class name="tests.api.ComparisonOfCreatedAndActualResultTest"></class>
+        </classes>
+    </test>
+
+    <test name="Removal of new Project">
+        <classes>
+            <class name="tests.api.RemovalProjectTest"></class>
+        </classes>
+    </test>
+
+</suite>
