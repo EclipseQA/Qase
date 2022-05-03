@@ -5,8 +5,8 @@ import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import staticdata.ProjectData;
-import testdata.GetLoginModel;
+import staticdata.commondata.ProjectData;
+import testdata.uitestdata.GetLoginModel;
 import utilities.Retry;
 import utilities.TestListeners;
 
