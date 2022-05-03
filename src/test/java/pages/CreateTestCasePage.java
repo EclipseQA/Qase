@@ -4,7 +4,7 @@ import elements.TestCaseBasicElements;
 import elements.TestCaseConditionalsElements;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j;
-import models.CreateCaseModel;
+import models.ui.CreateCaseModel;
 import org.openqa.selenium.*;
 
 import java.awt.*;

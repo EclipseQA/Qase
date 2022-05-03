@@ -3,17 +3,14 @@ package tests.ui;
 import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import staticdata.ProjectData;
-import testdata.GetLoginModel;
+import staticdata.commondata.ProjectData;
+import testdata.uitestdata.GetLoginModel;
 import utilities.Retry;
-import utilities.TestListeners;
 
 @Log4j
-@Epic("Creation of Test Case")
-@Listeners(TestListeners.class)
-public class CreateTestCaseTest extends BaseTest {
+@Epic("Web test")
+public class NewTestCaseTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, groups = "case")
     @Description("Test asserts that user is able to create 'test case'")

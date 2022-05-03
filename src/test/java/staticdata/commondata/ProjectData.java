@@ -1,7 +1,7 @@
-package staticdata;
+package staticdata.commondata;
 
-import models.CreateCaseModel;
-import testdata.GetCreateCaseModel;
+import models.ui.CreateCaseModel;
+import testdata.uitestdata.GetCreateCaseModel;
 import utilities.DataFaker;
 
 public class ProjectData {

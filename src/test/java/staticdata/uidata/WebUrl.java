@@ -1,4 +1,4 @@
-package staticdata;
+package staticdata.uidata;
 
 public class WebUrl {
 

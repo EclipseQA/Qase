@@ -1,6 +1,6 @@
-package testdata;
+package testdata.uitestdata;
 
-import models.LoginModel;
+import models.ui.LoginModel;
 import org.testng.annotations.DataProvider;
 import utilities.DataFaker;
 import utilities.PropertiesManager;

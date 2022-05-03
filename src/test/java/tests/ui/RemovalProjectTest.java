@@ -1,18 +1,16 @@
 package tests.ui;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import staticdata.ProjectData;
-import testdata.GetLoginModel;
+import staticdata.commondata.ProjectData;
+import testdata.uitestdata.GetLoginModel;
 import utilities.Retry;
 
 @Log4j
-public class DeleteCreatedProjectTest extends BaseTest {
+@Epic("Web test")
+public class RemovalProjectTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, groups = "removal")
     @Description("Test asserts that project is deleted after previous tests")
