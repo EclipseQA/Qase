@@ -23,7 +23,17 @@ public class RemovalProjectTest extends BaseTest {
 
         projectsPage.clickProjectDropDown(ProjectData.PROJECT_NAME, "Delete")
                 .confirmDeleteProjectButton();
-        Assert.assertEquals(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME), true
+        Assert.assertTrue(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME)
+                , "Project wasn't deleted");
+    }
+
+    @Test
+    public void verifyProjectIsDeletedTest(){
+        log.info("verifyProjectIsDeletedTest is started");
+        loginPage.openPage()
+                .login(GetLoginModel.getLoginModelWithValidData());
+
+        Assert.assertTrue(projectsPage.isProjectDeleted(ProjectData.PROJECT_NAME)
                 , "Project wasn't deleted");
     }
 }

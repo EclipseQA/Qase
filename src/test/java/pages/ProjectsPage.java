@@ -19,6 +19,12 @@ public class ProjectsPage extends BasePage {
     private By DELETE_PROJECT_BUTTON = By.xpath("//button[@type='submit']");
     private String PROJECT_XPATH = "//tr[contains(.,'%s')]//a[@class='project-name']";
 
+    @Step("Verify that '{0}' project is displayed on Projects Page")
+    public boolean isProjectDisplayedOnProjectPage(String projectName) {
+        log.info("Check if project presents on Projects Page");
+        return driver.findElement(By.xpath(editProjectXpath(projectName))).isDisplayed();
+    }
+
     @Step("Click on 'Create new project' button")
     public void clickCreateNewProjectButton() {
         log.info("Click on 'Create new project' button");
@@ -34,8 +40,7 @@ public class ProjectsPage extends BasePage {
     @Step("Open {0} project repository")
     public void navigateToProjectRepository(String projectName) {
         log.info("Open '" + projectName + "' repository");
-        String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
-        driver.findElement(By.xpath(formattedProjectXpath)).click();
+        driver.findElement(By.xpath(editProjectXpath(projectName))).click();
     }
 
     @Step("User is on Projects Page")
@@ -51,7 +56,7 @@ public class ProjectsPage extends BasePage {
         String formattedProjectXpath = String.format(PROJECT_XPATH, projectName);
         try {
             driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            return new WebDriverWait(driver, 5)
+            return new WebDriverWait(driver, 7)
                     .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(formattedProjectXpath)));
         } catch (NoSuchElementException e) {
             return true;
@@ -64,6 +69,10 @@ public class ProjectsPage extends BasePage {
     public void confirmDeleteProjectButton() {
         log.info("Click on 'Delete project' button");
         driver.findElement(DELETE_PROJECT_BUTTON).click();
+    }
+
+    private String editProjectXpath(String projectName) {
+        return String.format(PROJECT_XPATH, projectName);
     }
 
     public ProjectsPage(WebDriver driver) {

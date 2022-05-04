@@ -18,7 +18,7 @@ import java.io.IOException;
 public class NewProjectTest {
 
     @Test
-    public void createNewProject() throws IOException {
+    public void createNewProjectTest() throws IOException {
         NewProjectModel projectModel = GetNewProjectModel.getProjectModelWithAllFields();
         SuccessResponseNewProjectModel actualResult = RestAssured
                 .given()
@@ -33,6 +33,8 @@ public class NewProjectTest {
                 .and()
                 .extract()
                 .as(SuccessResponseNewProjectModel.class);
+
+        ProjectData.NUMBER_OF_PROJECT++;
 
         SuccessResponseNewProjectModel expectedResult
                 = new Gson().fromJson(new FileReader(API.SUCCESS_NEW_PROJECT_FILE), SuccessResponseNewProjectModel.class);

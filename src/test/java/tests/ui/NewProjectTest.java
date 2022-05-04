@@ -27,24 +27,38 @@ public class NewProjectTest extends BaseTest {
                         , "Private", "Add all")
                 .clickCreateProjectButton();
 
-        Assert.assertEquals(repositoryPage.isProjectCreated(ProjectData.PROJECT_NAME), true
+        ProjectData.NUMBER_OF_PROJECT++;
+
+        Assert.assertTrue(repositoryPage.isProjectCreatedMessageDisplayed(ProjectData.PROJECT_NAME)
                 , "Project wasn't created");
     }
 
-    @Test(dependsOnMethods = "createNewProjectTest", retryAnalyzer = Retry.class)
-    @Description("User attempts to create project with an existing name(depends on 'createNewProjectTest')")
+    @Test(retryAnalyzer = Retry.class)
+    @Description("User attempts to create project with an existing name")
     @Story("Test for creating project with an existing name")
     @Severity(SeverityLevel.NORMAL)
     public void createProjectWithTheSameCodeTest() {
         log.info("createProjectWithTheSameCodeTest is started");
-        repositoryPage.clickTabElement("Projects");
+        loginPage.openPage()
+                .login(GetLoginModel.getLoginModelWithValidData());
+
         projectsPage.clickCreateNewProjectButton();
 
         newProjectPage.inputProjectFields(ProjectData.PROJECT_NAME
                         , "Private", "Add all")
                 .clickCreateProjectButton();
 
-        Assert.assertEquals(newProjectPage.isProjectExistsMessageShown(), true
+        Assert.assertTrue(newProjectPage.isProjectExistsMessageShown()
                 , "Projected is created");
+    }
+
+    @Test
+    public void verifyProjectIsDisplayedOnProjectPageTest() {
+        log.info("verifyProjectIsDisplayedOnProjectPageTest is started");
+        loginPage.openPage()
+                .login(GetLoginModel.getLoginModelWithValidData());
+
+        Assert.assertTrue(projectsPage.isProjectDisplayedOnProjectPage(ProjectData.PROJECT_NAME)
+                , "Project wasn't created");
     }
 }

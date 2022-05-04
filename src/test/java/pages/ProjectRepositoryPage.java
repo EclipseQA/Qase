@@ -13,11 +13,20 @@ public class ProjectRepositoryPage extends BasePage {
     private String ALERT_PROJECT_CREATED = "//span[contains(.,'Project \"%s\" was created successfully!')]";
     private By CREATE_CASE_BUTTON = By.id("create-case-button");
     private By ALERT_TEST_CASE_CREATED = By.xpath("//span[text()='Test case was created successfully!']");
-    private String TEST_CASE_XPATH = "//a[contains(text(), '%s')]";
+    private String TEST_CASE_FORM_XPATH = "//a[contains(text(), '%s')]";
+    private String TEST_CASE_XPATH = "//div[contains(text(), '%s')]";
     private By CLOSE_BUTTON = By.xpath("//button[@class='style_closeBtn-1izrl']");
 
+    @Step("Verify that Test Case {0} presents on Repository Page")
+    public boolean isTestCaseDisplayed(String testCaseName) {
+        log.info("Check if the message 'Test case " + testCaseName + " is displayed");
+        String xpathAlertMessage = String.format(TEST_CASE_XPATH, testCaseName);
+        return driver.findElement(By.xpath(xpathAlertMessage)).isDisplayed();
+    }
+
+
     @Step("Verify that '{0}' project is created")
-    public boolean isProjectCreated(String projectName) {
+    public boolean isProjectCreatedMessageDisplayed(String projectName) {
         log.info("Check if the message 'Project " + projectName + " was created' is displayed");
         String xpathAlertMessage = String.format(ALERT_PROJECT_CREATED, projectName);
         return driver.findElement(By.xpath(xpathAlertMessage)).isDisplayed();
@@ -43,7 +52,7 @@ public class ProjectRepositoryPage extends BasePage {
     @Step("Select '{0}' Test case")
     public void clickOnTestCase(String nameOfTestCase) {
         log.info("Open '" + nameOfTestCase + "' test case form");
-        String formattedXpath = String.format(TEST_CASE_XPATH, nameOfTestCase);
+        String formattedXpath = String.format(TEST_CASE_FORM_XPATH, nameOfTestCase);
         driver.findElement(By.xpath(formattedXpath)).click();
     }
 

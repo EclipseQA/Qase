@@ -3,6 +3,7 @@ package tests.api;
 import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 import staticdata.apidata.API;
+import staticdata.commondata.ProjectData;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -22,6 +23,6 @@ public class QuantityProjectTest {
                 .statusCode(200)
                 .and()
                 .assertThat()
-                .body("result.total", equalTo(3));
+                .body("result.total", equalTo(ProjectData.NUMBER_OF_PROJECT));
     }
 }

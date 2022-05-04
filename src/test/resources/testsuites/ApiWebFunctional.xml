@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="WEB API Functional test" thread-count="1" parallel="tests">
+
+    <listeners>
+        <listener class-name="utilities.TestListeners"></listener>
+    </listeners>
+
+    <test name="API Create Project">
+        <classes>
+            <class name="tests.api.NewProjectTest"></class>
+        </classes>
+    </test>
+
+    <test name="WEB+API Assert Project is created">
+        <classes>
+            <class name="tests.ui.NewProjectTest">
+                <methods>
+                    <include name="verifyProjectIsDisplayedOnProjectPageTest"></include>
+                </methods>
+            </class>
+            <class name="tests.api.QuantityProjectTest"></class>
+        </classes>
+    </test>
+
+    <test name="WEB Attempt to create Project with the same code(title)">
+        <classes>
+            <class name="tests.ui.NewProjectTest">
+                <methods>
+                    <include name="createProjectWithTheSameCodeTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="API Create Test Case">
+        <classes>
+            <class name="tests.api.NewTestCaseTest"></class>
+        </classes>
+    </test>
+
+    <test name="WEB Assert Test Case is created">
+        <classes>
+            <class name="tests.ui.NewTestCaseTest">
+                <methods>
+                    <include name="verifyTestCaseIsDisplayedOnProjectRepositoryPageTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="API Delete Project">
+        <classes>
+            <class name="tests.api.RemovalProjectTest"></class>
+        </classes>
+    </test>
+
+    <test name="Web Assert Project is deleted">
+        <classes>
+            <class name="tests.ui.RemovalProjectTest">
+                <methods>
+                    <include name="verifyProjectIsDeletedTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -8,6 +8,8 @@ import staticdata.commondata.ProjectData;
 import testdata.uitestdata.GetLoginModel;
 import utilities.Retry;
 
+import java.util.Locale;
+
 @Log4j
 @Epic("Web test")
 public class NewTestCaseTest extends BaseTest {
@@ -31,7 +33,20 @@ public class NewTestCaseTest extends BaseTest {
                 .sendAttachment("D:\\Qase\\src\\test\\resources\\fileToAttach.jpg")
                 .clickSaveButton();
 
-        Assert.assertEquals(repositoryPage.isTestCaseCreated(), true
+        Assert.assertTrue(repositoryPage.isTestCaseCreated()
+                , "Test case wasn't created");
+    }
+
+    @Test
+    public void verifyTestCaseIsDisplayedOnProjectRepositoryPageTest() {
+        log.info("verifyTestCaseIsDisplayedOnProjectRepositoryPageTest is started");
+        loginPage.openPage()
+                .login(GetLoginModel.getLoginModelWithValidData());
+
+        projectsPage.openProjectsPage()
+                .navigateToProjectRepository(ProjectData.PROJECT_NAME);
+
+        Assert.assertTrue(repositoryPage.isTestCaseDisplayed(ProjectData.TEST_CASE_NAME)
                 , "Test case wasn't created");
     }
 }
