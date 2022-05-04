@@ -4,10 +4,7 @@ import driver.DriverFactory;
 import driver.DriverManager;
 import driver.DriverType;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 import pages.*;
 
 public class BaseTest {
@@ -24,7 +21,18 @@ public class BaseTest {
     @BeforeClass
     public void setUp() {
         DriverFactory factory = new DriverFactory();
-        driverManager = factory.getDriverManager(DriverType.CHROME);
+        DriverFactory factory = new DriverFactory();
+        if (browser.equalsIgnoreCase("chrome")) {
+            driverManager = factory.getDriverManager(DriverType.CHROME);
+        } else if (browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("mozilla")) {
+            driverManager = factory.getDriverManager(DriverType.MOZILLA);
+        } else if (browser.equalsIgnoreCase("edge")) {
+            driverManager = factory.getDriverManager(DriverType.EDGE);
+        } else if (browser.equalsIgnoreCase("remote")) {
+            driverManager = factory.getDriverManager(DriverType.REMOTE);
+        } else {
+            throw new IllegalStateException("Unknown browser");
+        }
         driverManager.createDriver();
         driver = driverManager.getDriver();
         driverManager.setTimeouts();
