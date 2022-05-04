@@ -12,7 +12,7 @@ import utilities.Retry;
 @Epic("Web test")
 public class NewProjectTest extends BaseTest {
 
-    @Test(retryAnalyzer = Retry.class, groups = "project")
+    @Test(retryAnalyzer = Retry.class)
     @Description("User attempts to create new project")
     @Story("Test for creating new project")
     @Severity(SeverityLevel.CRITICAL)
@@ -52,7 +52,10 @@ public class NewProjectTest extends BaseTest {
                 , "Projected is created");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("Test asserts that created project is displayed on Projects Page")
+    @Story("Test for verifying that project presents on Page")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyProjectIsDisplayedOnProjectPageTest() {
         log.info("verifyProjectIsDisplayedOnProjectPageTest is started");
         loginPage.openPage()

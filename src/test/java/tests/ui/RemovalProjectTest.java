@@ -13,7 +13,7 @@ import utilities.Retry;
 public class RemovalProjectTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, groups = "removal")
-    @Description("Test asserts that project is deleted after previous tests")
+    @Description("Test asserts that project is deleted and is not displayed on Projects Page")
     @Severity(SeverityLevel.NORMAL)
     @Story("Test for the removal of project")
     public void deleteCreatedProjectTest() {
@@ -27,7 +27,10 @@ public class RemovalProjectTest extends BaseTest {
                 , "Project wasn't deleted");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("Test asserts that project is deleted and is not displayed on Project Page")
+    @Story("Test for verifying that project doesn't present on Page")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyProjectIsDeletedTest(){
         log.info("verifyProjectIsDeletedTest is started");
         loginPage.openPage()

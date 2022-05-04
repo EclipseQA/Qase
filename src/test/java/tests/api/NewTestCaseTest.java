@@ -1,14 +1,20 @@
 package tests.api;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 import staticdata.apidata.API;
 import staticdata.commondata.ProjectData;
+import utilities.Retry;
 
+@Epic("API test")
 public class NewTestCaseTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("Test asserts that user is able to create 'test case'")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Test for creating Test case")
     public void createNewTestCaseTest() {
         RestAssured
                 .given()

@@ -1,5 +1,6 @@
 package tests.api;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import models.api.Step;
@@ -7,14 +8,19 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import staticdata.apidata.API;
 import staticdata.commondata.ProjectData;
+import utilities.Retry;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("API test")
 public class ComparisonOfCreatedAndActualResultTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("Test asserts that created Test case corresponds to actual result")
+    @Story("Test for comparing actual and expected Test case model")
+    @Severity(SeverityLevel.CRITICAL)
     public void compareElementsOfCreatedTestCaseAndActualResultTest() {
         List<Step> listOfSteps = RestAssured
                 .given()

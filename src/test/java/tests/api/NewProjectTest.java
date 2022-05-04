@@ -1,6 +1,7 @@
 package tests.api;
 
 import com.google.gson.Gson;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import models.api.NewProjectModel;
@@ -10,14 +11,18 @@ import org.testng.annotations.Test;
 import staticdata.apidata.API;
 import staticdata.commondata.ProjectData;
 import testdata.apitestdata.GetNewProjectModel;
+import utilities.Retry;
 
 import java.io.FileReader;
 import java.io.IOException;
 
-
+@Epic("API test")
 public class NewProjectTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("User attempts to create new project")
+    @Story("Test for creating new project")
+    @Severity(SeverityLevel.CRITICAL)
     public void createNewProjectTest() throws IOException {
         NewProjectModel projectModel = GetNewProjectModel.getProjectModelWithAllFields();
         SuccessResponseNewProjectModel actualResult = RestAssured

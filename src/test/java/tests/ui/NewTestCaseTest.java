@@ -37,7 +37,10 @@ public class NewTestCaseTest extends BaseTest {
                 , "Test case wasn't created");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
+    @Description("Test asserts that created test case is displayed on Project Repository Page")
+    @Story("Test for verifying that test case presents on Page")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyTestCaseIsDisplayedOnProjectRepositoryPageTest() {
         log.info("verifyTestCaseIsDisplayedOnProjectRepositoryPageTest is started");
         loginPage.openPage()
