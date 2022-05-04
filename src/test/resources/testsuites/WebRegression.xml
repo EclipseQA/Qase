@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" thread-count="1" parallel="tests" data-provider-thread-count="2">
+    
+    <parameter name="browser" value="chrome"></parameter>
+
+    <listeners>
+        <listener class-name="utilities.TestListeners"></listener>
+    </listeners>
+
+    <test name="Login Test">
+        <classes>
+            <class name="tests.ui.LoginTest"></class>
+        </classes>
+    </test>
+
+    <test name="Create Project Test">
+        <classes>
+            <class name="tests.ui.NewProjectTest">
+                <methods>
+                    <include name="createNewProjectTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Create Project Test with the same Code">
+        <classes>
+            <class name="tests.ui.NewProjectTest">
+                <methods>
+                    <include name="createProjectWithTheSameCodeTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify that Project is on Projects Page">
+        <classes>
+            <class name="tests.ui.NewProjectTest">
+                <methods>
+                    <include name="verifyProjectIsDisplayedOnProjectPageTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Create Test Case">
+        <classes>
+            <class name="tests.ui.NewTestCaseTest">
+                <methods>
+                    <include name="createTestCaseTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify that Test Case is on Project Repository Page">
+        <classes>
+            <class name="tests.ui.NewTestCaseTest">
+                <methods>
+                    <include name="verifyTestCaseIsDisplayedOnProjectRepositoryPageTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify that Created Test Case corresponds with Expected Result">
+        <classes>
+            <class name="tests.ui.ComparisonOfCreatedAndActualResultTest"></class>
+        </classes>
+    </test>
+
+    <test name="Removal Test Case">
+        <classes>
+            <class name="tests.ui.RemovalProjectTest">
+                <methods>
+                    <include name="deleteCreatedProjectTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Verify that Project doesn't exist on Projects Page">
+        <classes>
+            <class name="tests.ui.RemovalProjectTest">
+                <methods>
+                    <include name="verifyProjectIsDeletedTest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
