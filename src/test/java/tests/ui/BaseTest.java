@@ -19,7 +19,8 @@ public class BaseTest {
     protected TestCaseRepositoryFormPage repositoryFormPage;
 
     @BeforeClass
-    public void setUp() {
+    @Parameters("browser")
+    public void setUp(@Optional String browser) {
         DriverFactory factory = new DriverFactory();
         DriverFactory factory = new DriverFactory();
         if (browser.equalsIgnoreCase("chrome")) {
